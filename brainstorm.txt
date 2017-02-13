@@ -4,7 +4,7 @@ Use categories of web page as FILTERS
 
 Streetview API to show change over time.
 
-Use existing text in info window.
+Use existing text WHERE?
 
 Yelp API for businesses/housing.
 
