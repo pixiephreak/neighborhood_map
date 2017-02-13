@@ -228,12 +228,13 @@
 
 
 	  function initMap() {
-
 	  	var ecac = {lat: 38.924569, lng: -77.023722};
+
 
 	    map = new google.maps.Map(document.getElementById('map'), {
 	      center: ecac ,
-	      zoom: 14, styles: vintageStyles
+	      zoom: 14, styles: vintageStyles,
+	      mapTypeControl: false
 	    });
 
 	    //call addMarker when map is clicked
@@ -243,24 +244,45 @@
 	    });
 
 	    for(let i= 0; i < locations.length; i++){
-	    	console.log(locations[i].location);
-			addMarker(locations[i].location);
+			addMarker(locations[i].location, locations[i].title);
 		}
 	}
 
-    function addMarker(location) {
+    function addMarker(location, title) {
+    	var largeInfowindow = new google.maps.InfoWindow();
     	var marker = new google.maps.Marker({
     		position: location,
+    		title: locations.title,
     		map: map
     	});
     	markers.push(marker);
-    	//open infowindow on marker
-    	marker.addListener('click', function(){
-    		populateInfoWindow(this, largeInfoWindow);
-    	})
+    	marker.addListener('click', function() {
+    		if (largeInfowindow.marker != marker){
+    			largeInfowindow.marker= marker;
+    			largeInfowindow.open(map, marker);
+    			largeInfowindow.setContent('<div>'+ title + '</div');
+    		}
+
+          });
+
     }
 
-    console.log(markers);
+    // This function populates the infowindow when the marker is clicked. We'll only allow
+    // one infowindow which will open at the marker that is clicked, and populate based
+    // on that markers position.
+    function populateInfoWindow(marker, infowindow) {
+      // Check to make sure the infowindow is not already opened on this marker.
+      if (infowindow.marker != marker) {
+        infowindow.marker = marker;
+        infowindow.setContent('<div>' + marker + '</div>');
+        infowindow.open(map, marker);
+        // Make sure the marker property is cleared if the infowindow is closed.
+        infowindow.addListener('closeclick', function() {
+          infowindow.marker = null;
+        });
+      }
+    }
+
 
 
 	function setMapOnAll(map) {
