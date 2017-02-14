@@ -242,12 +242,22 @@ var vm;
 
 var Apartment = function(data, map) {
 	var self = this;
+	self.defaultIcon = makeMarkerIcon('ff5c33');
+	self.highlitedIcon = makeMarkerIcon('9653ac');
 	self.name = data.title;
 	self.marker = new google.maps.Marker({
 		map: map,
 		position: data.location,
-		title: data.title
+		animation: google.maps.Animation.DROP,
+		title: data.title,
+		icon: self.defaultIcon
 	});
+	self.marker.addListener('mouseout', function(){
+		this.setIcon(this.defaultIcon);
+	});
+	self.marker.addListener('mouseover', function(){
+		this.setIcon(this.highlitedIcon);
+	})
 	self.infowindow = new google.maps.InfoWindow();
 	self.marker.addListener('click', function(){
 		if(self.infowindow.marker != self.marker){
@@ -255,7 +265,7 @@ var Apartment = function(data, map) {
 			self.infowindow.open(map, self.marker);
 			self.infowindow.setContent('<div>'+ data.title + '<div>');
 			self.infowindow.addListener('closeclick', function(){
-				infowindow.marker = null;
+			self.infowindow.marker = null;
 			});
 		}
 	})
@@ -290,8 +300,16 @@ vm = new ViewModel();
 ko.applyBindings(vm);
 
 
-
-
+function makeMarkerIcon(markerColor) {
+  var markerImage = new google.maps.MarkerImage(
+    'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+    '|40|_|%E2%80%A2',
+    new google.maps.Size(21, 34),
+    new google.maps.Point(0, 0),
+    new google.maps.Point(10, 34),
+    new google.maps.Size(21,34));
+  return markerImage;
+}
 
 
 
