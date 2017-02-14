@@ -9,13 +9,12 @@
   </head>
 
   <body>
-  	<div id='floating-panel'>
-  	  <input value="Show All Markers" data-bind="click: markerList">
-  	  <input onclick="clearMarkers();" type=button value="Hide Markers">
-  	</div>
-    <div id="map">
-    </div>
-	<script
+
+  	<div id="floating-panel" data-bind: DO SOMETHING LIKE FOREACH:MARKERS ONLOAD></div>
+    <div id="map"></div>
+    <aside id="list-view" data-bind: BIND FILTER FUNCTION TO DROP DOWN MENU></aside>
+    <div ANIMATED STREETVIEW TIMELAPSE WHEN INFOWINDOW CLICKED></div>
+
 	<script type="text/javascript" src="map.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVJQodSaGBMvQx82vNjSPH_BTgu04NtIk&callback=initMap"
 	async defer></script>
