@@ -10,11 +10,12 @@
 
   <body>
   	<div id='floating-panel'>
-  	  <input onclick="showMarkers();" type=button value="Show All Markers">
+  	  <input value="Show All Markers" data-bind="click: markerList">
   	  <input onclick="clearMarkers();" type=button value="Hide Markers">
   	</div>
-    <div id="map"></div>
-
+    <div id="map">
+    </div>
+	<script
 	<script type="text/javascript" src="map.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVJQodSaGBMvQx82vNjSPH_BTgu04NtIk&callback=initMap"
 	async defer></script>
