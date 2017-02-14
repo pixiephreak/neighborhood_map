@@ -7,9 +7,9 @@ KNOCKOUT TO-DOs
 	load animated timelapse background image from streetview api( viewmodel bind to <div>)
 
 APP FUNCTIONALITY
-landing page: map and all markers load
-interactivity: each marker has an infowindow / wikipedia info loads when clicked / background changes to streetview timelaps when infowindow when clicked
-filter: category can be selected from dropdown / reduces number of markers on screen/ creates <DIV>  to display overview text / infowindow behaves the same
+	landing page: map and all markers load
+	interactivity: each marker has an infowindow / wikipedia info loads when clicked / background changes to streetview timelaps when infowindow when clicked
+	filter: category can be selected from dropdown / reduces number of markers on screen/ creates <DIV>  to display overview text / infowindow behaves the same
 
 
 
