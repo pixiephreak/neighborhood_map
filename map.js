@@ -11,7 +11,7 @@
 // 	interactivity: each marker has an infowindow / wikipedia info loads when clicked / background changes to streetview timelaps when infowindow when clicked
 // 	filter: category can be selected from dropdown / reduces number of markers on screen/ creates <DIV>  to display overview text / infowindow behaves the same
 
-
+// game plan: -> list view -> click binding to activate the list view items' markers -> filter the list and the markers -> third party api
 
 var vintageStyles = [
 {
@@ -229,7 +229,7 @@ var vintageStyles = [
 }
 ];
 
-// model : contain location and marker objects
+// list of places/locations to make into markers
 var initialMarkers = [
 	{title: '32Thirty-Two Apartments', location: {lat: 8.930985, lng: -77.023936}},
 	{title: 'Park Morton Apartments', location: {lat: 38.932629, lng:-77.022091}},
@@ -238,44 +238,34 @@ var initialMarkers = [
 	{title: 'The Swift Petworth', location: {lat:38.938373, lng:-77.024898}}
 	];
 
-// controller: store functions that interact with data
-var apiMarker= {
-	init: function(){
-		// model.currentMarkers = model.locations;
-		viewModel.initMap();
-	},
-	setMapOnAll: function(map){
-		for (var i = 0; i < markers.length; i++) {
-			markers[i].setMap(map);
-		}
-	},
-	showMarkers: function() {
-		setMapOnAll(map);
-	},
-	clearMarkers: function() {
-		setMapOnAll(null);
-	}
-};
-
-//view: load google map
-
 var vm;
 
-var Appartment = function(data, map) {
+var Apartment = function(data, map) {
 	var self = this;
-	this.name = data.title;
-	this.marker = new google.maps.Marker({
+	self.name = data.title;
+	self.marker = new google.maps.Marker({
 		map: map,
-		position: data.location
+		position: data.location,
+		title: data.title
 	});
-
+	self.infowindow = new google.maps.InfoWindow();
+	self.marker.addListener('click', function(){
+		if(self.infowindow.marker != self.marker){
+			self.infowindow.marker = self.marker;
+			self.infowindow.open(map, self.marker);
+			self.infowindow.setContent('<div>'+ data.title + '<div>');
+			self.infowindow.addListener('closeclick', function(){
+				infowindow.marker = null;
+			});
+		}
+	})
 	//this.marker.addListener
 };
 
 var ViewModel = function(){
 	var self = this;
 
-	this.appartments = ko.observableArray([]);
+	this.apartments = ko.observableArray([]);
 
 	this.initMap = function(){
 		var map;
@@ -289,8 +279,8 @@ var ViewModel = function(){
 	};
 
 	this.createMarkers = function(map) {
-		initialMarkers.forEach(function(appartment) {
-			self.appartments.push(new Appartment(appartment, map));
+		initialMarkers.forEach(function(apartment) {
+			self.apartments.push(new Apartment(apartment, map));
 		});
 	};
 };
