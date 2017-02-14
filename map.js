@@ -216,31 +216,52 @@ var vintageStyles = [
 	]
 }
 ];
-var markers = [];
 
-var locations = [{title: '32Thirty-Two Apartments', location: {lat: 8.930985, lng: -77.023936}},
-{title: 'Park Morton Apartments', location: {lat: 38.932629, lng:-77.022091}},
-{title: '3 Tree Flats', location: {lat:38.939390, lng:-77.025359}},
-{title:'Park Place', location: {lat:38.937395, lng:-77.024877}},
-{title: 'The Swift Petworth', location: {lat:38.938373, lng:-77.024898}}];
+// model : contain location and marker objects
+var model = {
+	// currentMarkers: null,
+	markers: [],
+	locations:
+	[{title: '32Thirty-Two Apartments', location: {lat: 8.930985, lng: -77.023936}},
+	{title: 'Park Morton Apartments', location: {lat: 38.932629, lng:-77.022091}},
+	{title: '3 Tree Flats', location: {lat:38.939390, lng:-77.025359}},
+	{title:'Park Place', location: {lat:38.937395, lng:-77.024877}},
+	{title: 'The Swift Petworth', location: {lat:38.938373, lng:-77.024898}}
+	]
 
+};
 
+// controller: store functions that interact with data
+controller = {
+	init: function(){
+		// model.currentMarkers = model.locations;
+		viewModel.initMap();
+	},
+	setMapOnAll: function(map){
+		for (var i = 0; i < markers.length; i++) {
+			markers[i].setMap(map);
+		}
+	},
+	showMarkers: function() {
+		setMapOnAll(map);
+	},
+	clearMarkers: function() {
+		setMapOnAll(null);
+	}
+};
 
-
-function initMap() {
+//view: load google map
+viewModel = {
+initMap: function(){
 	var ecac = {lat: 38.924569, lng: -77.023722};
-
-
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: ecac ,
 		zoom: 14, styles: vintageStyles,
 		mapTypeControl: false
 	});
-
 	    //call addMarker when map is clicked
 	    map.addListener('click', function(event){
 	    	addMarker(event.latLng);
-
 	    });
 
 	    for(let i = 0; i < locations.length; i++){
@@ -248,40 +269,9 @@ function initMap() {
 	    }
 	}
 
-	function addMarker(location, title) {
-		var largeInfowindow = new google.maps.InfoWindow();
-		var marker = new google.maps.Marker({
-			position: location,
-			title: locations.title,
-			map: map
-		});
-		markers.push(marker);
-		marker.addListener('click', function() {
-			if (largeInfowindow.marker != marker){
-				largeInfowindow.marker= marker;
-				largeInfowindow.open(map, marker);
-				largeInfowindow.setContent('<div>'+ title + '</div');
-			}
+};
 
-		});
-
-	}
-
-	function setMapOnAll(map) {
-		for (var i = 0; i < markers.length; i++) {
-			markers[i].setMap(map);
-		}
-	}
-
-
-	function showMarkers() {
-		setMapOnAll(map);
-	}
-
-
-	function clearMarkers() {
-		setMapOnAll(null);
-	}
+controller.init();
 
 
 
