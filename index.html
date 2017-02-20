@@ -5,21 +5,33 @@
     <title>Georgia Avenue Inheritance Tour</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	   <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
 
   <body>
 
   	<div id="floating-panel" data-bind: DO SOMETHING LIKE FOREACH:MARKERS ONLOAD></div>
     <div id="map"></div>
-    <aside id="list-view" data-bind: BIND FILTER FUNCTION TO DROP DOWN MENU></aside>
+    <aside id="list-view" >
+      <h3>Apartments</h3>
+      <ul data-bind="for-each: initialMarkers">
+        <li data-bind="text: $data.value">
+      </ul>
+    </aside>
     <div ANIMATED STREETVIEW TIMELAPSE WHEN INFOWINDOW CLICKED></div>
+  <!-- load jquery -->
+  <script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+  <!-- Latest compiled and BS minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="map.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVJQodSaGBMvQx82vNjSPH_BTgu04NtIk&callback=vm.initMap"
 	async defer></script>
 
 
   </body>
+
 
 </html>

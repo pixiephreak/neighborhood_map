@@ -11,7 +11,7 @@
 // 	interactivity: each marker has an infowindow / wikipedia info loads when clicked / background changes to streetview timelaps when infowindow when clicked
 // 	filter: category can be selected from dropdown / reduces number of markers on screen/ creates <DIV>  to display overview text / infowindow behaves the same
 
-// game plan: -> list view -> click binding to activate the list view items' markers -> filter the list and the markers -> third party api
+// game plan: -> list view -> click binding to activate the list view items' markers -> filter the list and the markers -> third party api -> marker animation and styling
 
 var vintageStyles = [
 {

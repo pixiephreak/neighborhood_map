@@ -2,6 +2,8 @@
        * element that contains the map. */
       #map {
         height: 100%;
+        width: 80%;
+        float: right;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -10,7 +12,7 @@
         padding: 0;
       }
 
-      input {
+      aside {
         width: 20%;
         background-color: #ccc;
       }
