@@ -291,6 +291,7 @@ var ViewModel = function(){
 	this.createMarkers = function(map) {
 		initialMarkers.forEach(function(apartment) {
 			self.apartments.push(new Apartment(apartment, map));
+			console.log(new Apartment(apartment, map));
 		});
 	};
 };
@@ -310,7 +311,4 @@ function makeMarkerIcon(markerColor) {
     new google.maps.Size(21,34));
   return markerImage;
 }
-
-
-
 
