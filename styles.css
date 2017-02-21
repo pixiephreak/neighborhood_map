@@ -20,3 +20,8 @@
       ul {
         list-style: none;
       }
+
+      .btn {
+        width:20%;
+        border-radius: 0;
+      }

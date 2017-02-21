@@ -280,9 +280,10 @@ var ViewModel = function(){
 	this.initMap = function(){
 		var map;
 		var ecac = {lat: 38.924569, lng: -77.023722};
+		var swift = {lat:38.938373, lng:-77.024898}
 		map = new google.maps.Map(document.getElementById('map'), {
-			center: ecac ,
-			zoom: 14, styles: vintageStyles,
+			center: swift,
+			zoom: 15, styles: vintageStyles,
 			mapTypeControl: false
 		});
 		self.createMarkers(map);
