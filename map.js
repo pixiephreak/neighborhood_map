@@ -291,7 +291,6 @@ var ViewModel = function(){
 	this.createMarkers = function(map) {
 		initialMarkers.forEach(function(apartment) {
 			self.apartments.push(new Apartment(apartment, map));
-			console.log(new Apartment(apartment, map));
 		});
 	};
 };

@@ -14,13 +14,15 @@
 
   	<div id="floating-panel" data-bind: DO SOMETHING LIKE FOREACH:MARKERS ONLOAD></div>
     <div id="map"></div>
-    <aside id="list-view" >
-      <h3>Apartments</h3>
-      <!-- how to get at this data when the binding it to VM? -->
-      <ul data-bind= "foreach: {data: apartments, as: 'apartment' }"">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Dropdown
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" data-bind= "foreach: {data: apartments, as: 'apartment' }">
         <li data-bind="text: apartment.name">
       </ul>
-    </aside>
+    </div>
     <div ANIMATED STREETVIEW TIMELAPSE WHEN INFOWINDOW CLICKED></div>
   <!-- load jquery -->
   <script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>

@@ -16,3 +16,7 @@
         width: 20%;
         background-color: #ccc;
       }
+
+      ul {
+        list-style: none;
+      }
