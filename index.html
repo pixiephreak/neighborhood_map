@@ -17,8 +17,8 @@
     <aside id="list-view" >
       <h3>Apartments</h3>
       <!-- how to get at this data when the binding it to VM? -->
-      <ul data-bind="for-each: apartments">
-        <li data-bind="text: Apartment.name">
+      <ul data-bind= "foreach: {data: apartments, as: 'apartment' }"">
+        <li data-bind="text: apartment.name">
       </ul>
     </aside>
     <div ANIMATED STREETVIEW TIMELAPSE WHEN INFOWINDOW CLICKED></div>
