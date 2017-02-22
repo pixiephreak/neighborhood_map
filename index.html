@@ -19,9 +19,14 @@
         Dropdown
         <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" data-bind= "foreach: {data: apartments, as: 'apartment' }">
-        <li data-bind="text: apartment.name">
+      <ul  class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li>
       </ul>
+      <aside>
+        <ul  data-bind= "foreach: apartments" >
+          <li data-bind="text: name"></li>
+        </ul>
+      </aside>
     </div>
     <div ANIMATED STREETVIEW TIMELAPSE WHEN INFOWINDOW CLICKED></div>
   <!-- load jquery -->

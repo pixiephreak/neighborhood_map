@@ -253,24 +253,26 @@ var Apartment = function(data, map) {
 		icon: self.defaultIcon
 	});
 	self.marker.addListener('mouseout', function(){
-		this.setIcon(this.defaultIcon);
+		this.setIcon(self.defaultIcon);
 	});
 	self.marker.addListener('mouseover', function(){
-		this.setIcon(this.highlitedIcon);
+		this.setIcon(self.highlitedIcon);
 	})
-	self.infowindow = new google.maps.InfoWindow();
+
 	self.marker.addListener('click', function(){
-		if(self.infowindow.marker != self.marker){
-			self.infowindow.marker = self.marker;
-			self.infowindow.open(map, self.marker);
-			self.infowindow.setContent('<div>'+ data.title + '<div>');
-			self.infowindow.addListener('closeclick', function(){
-			self.infowindow.marker = null;
+		if(infowindow.marker != self.marker){
+			infowindow.marker = self.marker;
+			infowindow.open(map, self.marker);
+			infowindow.setContent('<div>'+ data.title + '<div>');
+			infowindow.addListener('closeclick', function(){
+			infowindow.marker = null;
 			});
 		}
 	})
 	//this.marker.addListener
 };
+
+var infoWindow;
 
 var ViewModel = function(){
 	var self = this;
@@ -278,6 +280,7 @@ var ViewModel = function(){
 	this.apartments = ko.observableArray([]);
 
 	this.initMap = function(){
+		infowindow = new google.maps.InfoWindow();
 		var map;
 		var ecac = {lat: 38.924569, lng: -77.023722};
 		var swift = {lat:38.938373, lng:-77.024898}
