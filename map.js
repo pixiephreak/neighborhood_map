@@ -231,7 +231,7 @@ var vintageStyles = [
 
 // list of places/locations to make into markers
 var initialMarkers = [
-	{title: '32Thirty-Two Apartments', location: {lat: 8.930985, lng: -77.023936}},
+	{title: '32Thirty-Two Apartments', location: {lat: 38.930985, lng: -77.023936}},
 	{title: 'Park Morton Apartments', location: {lat: 38.932629, lng:-77.022091}},
 	{title: '3 Tree Flats', location: {lat:38.939390, lng:-77.025359}},
 	{title:'Park Place', location: {lat:38.937395, lng:-77.024877}},
@@ -286,7 +286,7 @@ var ViewModel = function(){
 		var swift = {lat:38.938373, lng:-77.024898}
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: swift,
-			zoom: 15, styles: vintageStyles,
+			zoom: 14, styles: vintageStyles,
 			mapTypeControl: false
 		});
 		self.createMarkers(map);
@@ -299,16 +299,9 @@ var ViewModel = function(){
 	};
 
 	this.setWindow = function(clickedLoc){
-		console.log(this, self);
-		if(infowindow.marker != self.marker){
-			infowindow.marker = self.marker;
-			infowindow.open(map, self.marker);
-			infowindow.setContent('<div>'+ data.title + '<div>');
-			infowindow.addListener('closeclick', function(){
-			infowindow.marker = null;
-			});
-		}
-
+		var marker = clickedLoc.marker;
+		console.log(marker);
+		google.maps.event.trigger(marker,'click');
 	}
 
 };
