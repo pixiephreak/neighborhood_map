@@ -272,7 +272,7 @@ var Apartment = function(data, map) {
 	//this.marker.addListener
 };
 
-var infoWindow;
+var infowindow;
 
 var ViewModel = function(){
 	var self = this;
@@ -297,10 +297,24 @@ var ViewModel = function(){
 			self.apartments.push(new Apartment(apartment, map));
 		});
 	};
+
+	this.setWindow = function(clickedLoc){
+		console.log(this, self);
+		if(infowindow.marker != self.marker){
+			infowindow.marker = self.marker;
+			infowindow.open(map, self.marker);
+			infowindow.setContent('<div>'+ data.title + '<div>');
+			infowindow.addListener('closeclick', function(){
+			infowindow.marker = null;
+			});
+		}
+
+	}
+
 };
 
 vm = new ViewModel();
-
+//why did Karol do this?
 ko.applyBindings(vm);
 
 

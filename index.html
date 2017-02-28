@@ -12,7 +12,7 @@
 
   <body>
 
-  	<div id="floating-panel" data-bind: DO SOMETHING LIKE FOREACH:MARKERS ONLOAD></div>
+  	<div id="floating-panel"></div>
     <div id="map"></div>
     <div class="dropdown">
       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -24,7 +24,8 @@
       </ul>
       <aside>
         <ul  data-bind= "foreach: apartments" >
-          <li data-bind="text: name"></li>
+          <li data-bind="text: name, click: $parent.setWindow()">
+          </li>
         </ul>
       </aside>
     </div>
