@@ -230,6 +230,8 @@ var vintageStyles = [
 ];
 
 // list of places/locations to make into markers on load (apartments)
+//TO-DO Add website content to data under key "info"
+// add types
 var initialMarkers = [
 	{title: 'La Bamba Sub Shop', location: {lat: 38.924339, lng: -77.022798}},
 	{title: 'Pleasant Plains Workshop', location: {lat: 38.924454, lng: -77.022806}},
@@ -238,10 +240,7 @@ var initialMarkers = [
 	{title: "Morgan's Seafood", location: {lat:38.93017, lng: -77.023566}},
 	{title: "Ana's Restaurant", location: {lat: 38.930857, lng: -77.023253}},
 	{title: 'Yoga Heights', location: {lat: 38.933404, lng: -77.024329}},
-	{title: 'Fish in the Hood', location: {lat: 8.934663, lng: -77.023904}}
-	];
-// business data
-var apartmentMarkers = [
+	{title: 'Fish in the Hood', location: {lat: 8.934663, lng: -77.023904}},
 	{title: '32Thirty-Two Apartments', location: {lat: 38.930985, lng: -77.023936}},
 	{title: 'Park Morton Apartments', location: {lat: 38.932629, lng:-77.022091}},
 	{title: '3 Tree Flats', location: {lat:38.939390, lng:-77.025359}},
@@ -285,6 +284,8 @@ var Place = function(data, map) {
 			});
 		}
 	})
+
+	self.visible = ko.observable(true);
 	//this.marker.addListener
 };
 
@@ -292,9 +293,9 @@ var infowindow;
 
 var ViewModel = function(){
 	var self = this;
-	this.categories = ko.observableArray([new Category("Housing"),new Category("People"),new Category("Businesses"),]);
-	this.apartments = ko.observableArray([]);
-	this.biz = ko.observableArray([]);
+	this.categories = ko.observableArray([new Category("Housing"),new Category("Businesses"),]);
+	this.places = ko.observableArray([]);
+
 
 	this.initMap = function(){
 		infowindow = new google.maps.InfoWindow();
@@ -310,8 +311,8 @@ var ViewModel = function(){
 	};
 
 	this.createMarkers = function(map) {
-		initialMarkers.forEach(function(biz) {
-			self.biz.push(new Place(biz, map));
+		initialMarkers.forEach(function(place) {
+			self.places.push(new Place(place, map));
 		});
 	};
 	//why does this overwrite?
@@ -326,6 +327,36 @@ var ViewModel = function(){
 		console.log(marker);
 		google.maps.event.trigger(marker,'click');
 	}
+
+
+	// this.showMarker = ko.computed(function() {
+	// 		if(this.visible() === true) {
+	// 			this.marker.setMap(map);
+	// 		} else {
+	// 			this.marker.setMap(null);
+	// 		}
+	// 		return true;
+	// 	}, this);
+	// 	this.filteredList = ko.computed( function() {
+	// 	var filter = self.searchTerm().toLowerCase();
+	// 	if (!filter) {
+	// 		self.locationList().forEach(function(locationItem){
+	// 			locationItem.visible(true);
+	// 		});
+	// 		return self.locationList();
+	// 	} else {
+	// 		return ko.utils.arrayFilter(self.locationList(), function(locationItem) {
+	// 			var string = locationItem.name.toLowerCase();
+	// 			var result = (string.search(filter) >= 0);
+	// 			locationItem.visible(result);
+	// 			return result;
+	// 		});
+	// 	}
+	// }, self);
+
+
+
+
 
 };
 

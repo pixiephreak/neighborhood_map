@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>test dropdown ko</title>
+</head>
+<body>
+<p>
+   Category:
+    <select data-bind="options: categories,
+                       optionsText: 'name',
+                       optionsCaption: 'Choose...'"></select>
+</p>
+
+<div data-bind="visible: selectedCountry"> <!-- Appears when you select something -->
+    You have chosen a country with population
+    <span data-bind="text: selectedCountry() ? selectedCountry().countryPopulation : 'unknown'"></span>.
+</div>
+
+<script type="text/javascript">
+    // Constructor for an object with two properties
+    var Country = function(name, population) {
+        this.countryName = name;
+        this.countryPopulation = population;
+    };
+
+    var viewModel = {
+        availableCountries : ko.observableArray([
+            new Country("UK", 65000000),
+            new Country("USA", 320000000),
+            new Country("Sweden", 29000000)
+        ]),
+        selectedCountry : ko.observable() // Nothing selected by default
+    };
+</script>
+
+
+</body>
+<!-- load jquery -->
+  <script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+  <script type="text/javascript" src='test.js'></script>
+</html>
+
+
+
+

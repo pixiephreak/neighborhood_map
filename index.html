@@ -22,13 +22,13 @@
                              optionsText: 'name',
                              optionsCaption: 'Choose...'"></select>
       </p>
+    <!-- /TEST TEST -->
+     <div data-bind="visible: this.visible">
+         You will see this message only when "visible" holds a true value.
+     </div>
 
-      <!-- <div data-bind="visible: selectedCountry"> --> <!-- Appears when you select something -->
-      <!--     You have chosen a country with population
-          <span data-bind="text: selectedCountry() ? selectedCountry().countryPopulation : 'unknown'"></span>.
-      </div> -->
       <aside>
-        <ul  data-bind= "foreach: biz" >
+        <ul  data-bind= "foreach: places" >
           <li data-bind="text: name, click: $parent.setWindow">
           </li>
         </ul>
