@@ -14,22 +14,27 @@
 
   	<div id="floating-panel"></div>
     <div id="map"></div>
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Dropdown
-        <span class="caret"></span>
-      </button>
-      <ul  class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li>
-      </ul>
+    <div>
+      <!-- KO dropdown -->
+      <p>
+         Category:
+          <select data-bind="options: categories,
+                             optionsText: 'name',
+                             optionsCaption: 'Choose...'"></select>
+      </p>
+
+      <!-- <div data-bind="visible: selectedCountry"> --> <!-- Appears when you select something -->
+      <!--     You have chosen a country with population
+          <span data-bind="text: selectedCountry() ? selectedCountry().countryPopulation : 'unknown'"></span>.
+      </div> -->
       <aside>
-        <ul  data-bind= "foreach: apartments" >
+        <ul  data-bind= "foreach: biz" >
           <li data-bind="text: name, click: $parent.setWindow">
           </li>
         </ul>
       </aside>
     </div>
-    <div ANIMATED STREETVIEW TIMELAPSE WHEN INFOWINDOW CLICKED></div>
+    <!-- <div ANIMATED STREETVIEW TIMELAPSE WHEN INFOWINDOW CLICKED></div> -->
   <!-- load jquery -->
   <script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>

@@ -229,8 +229,19 @@ var vintageStyles = [
 }
 ];
 
-// list of places/locations to make into markers
+// list of places/locations to make into markers on load (apartments)
 var initialMarkers = [
+	{title: 'La Bamba Sub Shop', location: {lat: 38.924339, lng: -77.022798}},
+	{title: 'Pleasant Plains Workshop', location: {lat: 38.924454, lng: -77.022806}},
+	{title: 'Casa Ruby', location: {lat:8.926763, lng: -77.023212}},
+	{title:'Harrar Coffee Roaster', location: {lat:38.927267, lng: -77.023277}},
+	{title: "Morgan's Seafood", location: {lat:38.93017, lng: -77.023566}},
+	{title: "Ana's Restaurant", location: {lat: 38.930857, lng: -77.023253}},
+	{title: 'Yoga Heights', location: {lat: 38.933404, lng: -77.024329}},
+	{title: 'Fish in the Hood', location: {lat: 8.934663, lng: -77.023904}}
+	];
+// business data
+var apartmentMarkers = [
 	{title: '32Thirty-Two Apartments', location: {lat: 38.930985, lng: -77.023936}},
 	{title: 'Park Morton Apartments', location: {lat: 38.932629, lng:-77.022091}},
 	{title: '3 Tree Flats', location: {lat:38.939390, lng:-77.025359}},
@@ -238,9 +249,14 @@ var initialMarkers = [
 	{title: 'The Swift Petworth', location: {lat:38.938373, lng:-77.024898}}
 	];
 
+
 var vm;
 
-var Apartment = function(data, map) {
+var Category = function(name) {
+        this.name = name;
+    };
+
+var Place = function(data, map) {
 	var self = this;
 	self.defaultIcon = makeMarkerIcon('ff5c33');
 	self.highlitedIcon = makeMarkerIcon('9653ac');
@@ -276,8 +292,9 @@ var infowindow;
 
 var ViewModel = function(){
 	var self = this;
-
+	this.categories = ko.observableArray([new Category("Housing"),new Category("People"),new Category("Businesses"),]);
 	this.apartments = ko.observableArray([]);
+	this.biz = ko.observableArray([]);
 
 	this.initMap = function(){
 		infowindow = new google.maps.InfoWindow();
@@ -293,10 +310,16 @@ var ViewModel = function(){
 	};
 
 	this.createMarkers = function(map) {
-		initialMarkers.forEach(function(apartment) {
-			self.apartments.push(new Apartment(apartment, map));
+		initialMarkers.forEach(function(biz) {
+			self.biz.push(new Place(biz, map));
 		});
 	};
+	//why does this overwrite?
+	// this.createMarkers = function(map) {
+	// 	apartmentMarkers.forEach(function(apartment) {
+	// 		self.apartments.push(new Place(apartment, map));
+	// 	});
+	// };
 
 	this.setWindow = function(clickedLoc){
 		var marker = clickedLoc.marker;
