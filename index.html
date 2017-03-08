@@ -23,11 +23,6 @@
                              value: selectedCategory ,
                              optionsCaption: 'Choose...'"></select>
       </p>
-    <!-- /TEST TEST -->
-     <div data-bind="visible: this.visible">
-         You will see this message only when "visible" holds a true value.
-     </div>
-
       <aside>
         <ul  data-bind= "foreach: filterPlaces" >
           <li data-bind="text: name, click: $parent.setWindow">
