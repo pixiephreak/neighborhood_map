@@ -233,33 +233,31 @@ var vintageStyles = [
 //TO-DO Add website content to data under key "info"
 // add types
 var initialMarkers = [
-	{title: 'La Bamba Sub Shop', location: {lat: 38.924339, lng: -77.022798}},
-	{title: 'Pleasant Plains Workshop', location: {lat: 38.924454, lng: -77.022806}},
-	{title: 'Casa Ruby', location: {lat:8.926763, lng: -77.023212}},
-	{title:'Harrar Coffee Roaster', location: {lat:38.927267, lng: -77.023277}},
-	{title: "Morgan's Seafood", location: {lat:38.93017, lng: -77.023566}},
-	{title: "Ana's Restaurant", location: {lat: 38.930857, lng: -77.023253}},
-	{title: 'Yoga Heights', location: {lat: 38.933404, lng: -77.024329}},
-	{title: 'Fish in the Hood', location: {lat: 8.934663, lng: -77.023904}},
-	{title: '32Thirty-Two Apartments', location: {lat: 38.930985, lng: -77.023936}},
-	{title: 'Park Morton Apartments', location: {lat: 38.932629, lng:-77.022091}},
-	{title: '3 Tree Flats', location: {lat:38.939390, lng:-77.025359}},
-	{title:'Park Place', location: {lat:38.937395, lng:-77.024877}},
-	{title: 'The Swift Petworth', location: {lat:38.938373, lng:-77.024898}}
+	{title: 'La Bamba Sub Shop', location: {lat: 38.924339, lng: -77.022798}, type: 'business'},
+	{title: 'Pleasant Plains Workshop', location: {lat: 38.924454, lng: -77.022806}, type: 'business'},
+	{title: 'Casa Ruby', location: {lat:8.926763, lng: -77.023212} , type: 'business'},
+	{title:'Harrar Coffee Roaster', location: {lat:38.927267, lng: -77.023277} , type: 'business'},
+	{title: "Morgan's Seafood", location: {lat:38.93017, lng: -77.023566} , type: 'business'},
+	{title: "Ana's Restaurant", location: {lat: 38.930857, lng: -77.023253}, type: 'business'},
+	{title: 'Yoga Heights', location: {lat: 38.933404, lng: -77.024329}, type: 'business'},
+	{title: 'Fish in the Hood', location: {lat: 8.934663, lng: -77.023904}, type: 'business'},
+	{title: '32Thirty-Two Apartments', location: {lat: 38.930985, lng: -77.023936}, type: 'housing'},
+	{title: 'Park Morton Apartments', location: {lat: 38.932629, lng:-77.022091}, type: 'housing'},
+	{title: '3 Tree Flats', location: {lat:38.939390, lng:-77.025359}, type: 'housing'},
+	{title:'Park Place', location: {lat:38.937395, lng:-77.024877}, type: 'housing'},
+	{title: 'The Swift Petworth', location: {lat:38.938373, lng:-77.024898}, type: 'housing'}
 	];
 
 
 var vm;
 
-var Category = function(name) {
-        this.name = name;
-    };
 
 var Place = function(data, map) {
 	var self = this;
 	self.defaultIcon = makeMarkerIcon('ff5c33');
 	self.highlitedIcon = makeMarkerIcon('9653ac');
 	self.name = data.title;
+	self.type = data.type;
 	self.marker = new google.maps.Marker({
 		map: map,
 		position: data.location,
@@ -293,8 +291,27 @@ var infowindow;
 
 var ViewModel = function(){
 	var self = this;
-	this.categories = ko.observableArray([new Category("Housing"),new Category("Businesses"),]);
+	this.categories = ko.observableArray(["Housing","Business"]);
 	this.places = ko.observableArray([]);
+	this.filterPlaces = ko.observableArray([]);
+	this.selectedCategory = ko.observable('');
+	this.filter = ko.computed(function(){
+// TO-DO filter markers
+// TO-DO refine filters to show business
+		if(self.selectedCategory()){
+			self.filterPlaces([]);
+		self.places().forEach(function(place){
+			console.log(self.selectedCategory())
+			var type = place.type;
+			if(self.selectedCategory().toLowerCase() === type.toLowerCase()){
+				self.filterPlaces.push(place);
+				console.log(place);
+			}
+
+		});
+		}
+	});
+
 
 
 	this.initMap = function(){
@@ -315,48 +332,12 @@ var ViewModel = function(){
 			self.places.push(new Place(place, map));
 		});
 	};
-	//why does this overwrite?
-	// this.createMarkers = function(map) {
-	// 	apartmentMarkers.forEach(function(apartment) {
-	// 		self.apartments.push(new Place(apartment, map));
-	// 	});
-	// };
 
 	this.setWindow = function(clickedLoc){
 		var marker = clickedLoc.marker;
 		console.log(marker);
 		google.maps.event.trigger(marker,'click');
 	}
-
-
-	// this.showMarker = ko.computed(function() {
-	// 		if(this.visible() === true) {
-	// 			this.marker.setMap(map);
-	// 		} else {
-	// 			this.marker.setMap(null);
-	// 		}
-	// 		return true;
-	// 	}, this);
-	// 	this.filteredList = ko.computed( function() {
-	// 	var filter = self.searchTerm().toLowerCase();
-	// 	if (!filter) {
-	// 		self.locationList().forEach(function(locationItem){
-	// 			locationItem.visible(true);
-	// 		});
-	// 		return self.locationList();
-	// 	} else {
-	// 		return ko.utils.arrayFilter(self.locationList(), function(locationItem) {
-	// 			var string = locationItem.name.toLowerCase();
-	// 			var result = (string.search(filter) >= 0);
-	// 			locationItem.visible(result);
-	// 			return result;
-	// 		});
-	// 	}
-	// }, self);
-
-
-
-
 
 };
 

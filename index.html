@@ -19,7 +19,8 @@
       <p>
          Category:
           <select data-bind="options: categories,
-                             optionsText: 'name',
+
+                             value: selectedCategory ,
                              optionsCaption: 'Choose...'"></select>
       </p>
     <!-- /TEST TEST -->
@@ -28,7 +29,7 @@
      </div>
 
       <aside>
-        <ul  data-bind= "foreach: places" >
+        <ul  data-bind= "foreach: filterPlaces" >
           <li data-bind="text: name, click: $parent.setWindow">
           </li>
         </ul>
