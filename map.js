@@ -293,25 +293,27 @@ var ViewModel = function(){
 	var self = this;
 	this.categories = ko.observableArray(["All","Housing","Business"]);
 	this.places = ko.observableArray([]);
-	this.filterPlaces = ko.observableArray([]);
 	this.selectedCategory = ko.observable('');
-	this.filter = ko.computed(function(){
-// TO-DO filter markers
-// TO-DO refine filters to show business
+	this.filterPlaces = ko.computed(function(){
+		self.currentPlaces = ko.observableArray([]);
 		if(!self.selectedCategory()|| self.selectedCategory() === 'All'){
-			//TO-DO: doesnt't show list items bc linked to filtered places
-			//write a funciton that dynamically sets binding?
-			return self.places;}else{
-			self.filterPlaces([]);
-		self.places().forEach(function(place){
-			console.log(self.selectedCategory())
-			var type = place.type;
-			if(self.selectedCategory().toLowerCase() === type.toLowerCase()){
-				self.filterPlaces.push(place);
-			}
-		});
-	}
-	console.log('filtered place', self.filterPlaces);
+			return self.places;
+			console.log("returned self.places")
+		}else{
+			self.places().forEach(function(place){
+				console.log(self.selectedCategory())
+				var type = place.type;
+				if(self.selectedCategory().toLowerCase() === type.toLowerCase()){
+					self.currentPlaces.push(place);
+				}
+				return self.currentPlaces();
+				console.log("returned self.currentPlaces")
+				console.log(self);
+			});
+
+		}
+	console.log("logging current places", self.currentPlaces())
+
 });
 
 
