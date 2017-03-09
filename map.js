@@ -283,7 +283,7 @@ var Place = function(data, map) {
 		}
 	})
 
-	self.visible = true;
+	self.marker.visible = ko.observable(true);
 	//this.marker.addListener
 };
 
@@ -305,10 +305,6 @@ var ViewModel = function(){
 				if(self.selectedCategory().toLowerCase() === type.toLowerCase()){
 					self.currentPlaces.push(place);
 					console.log(place.marker)
-				}else{
-					console.log(place.marker.visible)
-					place.marker.visible = false;
-					console.log(place.marker.visible)
 				}
 
 			});
