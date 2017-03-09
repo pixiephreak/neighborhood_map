@@ -283,7 +283,7 @@ var Place = function(data, map) {
 		}
 	})
 
-	self.visible = ko.observable(true);
+	self.visible = true;
 	//this.marker.addListener
 };
 
@@ -297,24 +297,27 @@ var ViewModel = function(){
 	this.filterPlaces = ko.computed(function(){
 		self.currentPlaces = ko.observableArray([]);
 		if(!self.selectedCategory()|| self.selectedCategory() === 'All'){
-			return self.places;
-			console.log("returned self.places")
+			return self.places();
 		}else{
+
 			self.places().forEach(function(place){
-				console.log(self.selectedCategory())
 				var type = place.type;
 				if(self.selectedCategory().toLowerCase() === type.toLowerCase()){
 					self.currentPlaces.push(place);
+					console.log(place.marker)
+				}else{
+					console.log(place.marker.visible)
+					place.marker.visible = false;
+					console.log(place.marker.visible)
 				}
-				return self.currentPlaces();
-				console.log("returned self.currentPlaces")
-				console.log(self);
-			});
 
+			});
+			return self.currentPlaces();
 		}
-	console.log("logging current places", self.currentPlaces())
+
 
 });
+
 
 
 
@@ -339,7 +342,6 @@ var ViewModel = function(){
 
 	this.setWindow = function(clickedLoc){
 		var marker = clickedLoc.marker;
-		console.log(marker);
 		google.maps.event.trigger(marker,'click');
 	}
 
