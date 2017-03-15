@@ -23,7 +23,7 @@
                              optionsCaption: 'Choose...'"></select>
       </p>
       <aside>
-        <ul  data-bind= "foreach: filterPlaces" >
+        <ul  data-bind= "foreach: filterPlaces " >
           <li data-bind="text: name, click: $parent.setWindow">
           </li>
         </ul>
@@ -38,7 +38,7 @@
 	<script src="map.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVJQodSaGBMvQx82vNjSPH_BTgu04NtIk&callback=vm.initMap"
 	async defer></script>
-
+<!-- add on error -->
 
   </body>
 

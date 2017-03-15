@@ -280,10 +280,14 @@ var Place = function(data, map) {
 			infowindow.addListener('closeclick', function(){
 			infowindow.marker = null;
 			});
+			//setAnimation on click
+			//set API request
+			//add toggle button for list view to make it responsive using display none or display blick
+			//slide in and out using off canvas or use bootstrap
 		}
 	})
 
-	self.marker.visible = ko.observable(true);
+
 	//this.marker.addListener
 };
 
@@ -297,20 +301,24 @@ var ViewModel = function(){
 	this.filterPlaces = ko.computed(function(){
 		self.currentPlaces = ko.observableArray([]);
 		if(!self.selectedCategory()|| self.selectedCategory() === 'All'){
+			self.places().forEach(function(place){
+			place.marker.setVisible(true);
+			});
 			return self.places();
 		}else{
-
 			self.places().forEach(function(place){
+				place.marker.setVisible(false); // marker is hidden
+
 				var type = place.type;
 				if(self.selectedCategory().toLowerCase() === type.toLowerCase()){
 					self.currentPlaces.push(place);
-					console.log(place.marker)
+					place.marker.setVisible(true); // marker is hidden
 				}
+
 
 			});
 			return self.currentPlaces();
 		}
-
 
 });
 
@@ -344,7 +352,6 @@ var ViewModel = function(){
 };
 
 vm = new ViewModel();
-//why did Karol do this?
 ko.applyBindings(vm);
 
 
