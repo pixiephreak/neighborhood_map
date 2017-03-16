@@ -272,11 +272,12 @@ var Place = function(data, map) {
 		this.setIcon(self.highlitedIcon);
 	})
 
-	self.marker.addListener('click', function(){
+	self.marker.addListener('click', toggleBounce, function(){
 		if(infowindow.marker != self.marker){
 			infowindow.marker = self.marker;
 			infowindow.open(map, self.marker);
 			infowindow.setContent('<div>'+ data.title + '<div>');
+			infowindow.marker.setAnimation(google.maps.Animation.BOUNCE)
 			infowindow.addListener('closeclick', function(){
 			infowindow.marker = null;
 			});
@@ -285,7 +286,19 @@ var Place = function(data, map) {
 			//add toggle button for list view to make it responsive using display none or display blick
 			//slide in and out using off canvas or use bootstrap
 		}
-	})
+	});
+
+	function toggleBounce(){
+		if(infowindow.marker != self.marker){
+			infowindow.marker = self.marker;
+			if (infowindow.marker.getAnimation() !== null) {
+			  infowindow.marker.setAnimation(null);
+			} else {
+			  infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
+			}
+		}
+	}
+
 
 
 	//this.marker.addListener
@@ -308,11 +321,14 @@ var ViewModel = function(){
 		}else{
 			self.places().forEach(function(place){
 				place.marker.setVisible(false); // marker is hidden
+				// place.marker.setAnimation(google.maps.Animation.DROP);
 
 				var type = place.type;
 				if(self.selectedCategory().toLowerCase() === type.toLowerCase()){
 					self.currentPlaces.push(place);
 					place.marker.setVisible(true); // marker is hidden
+					place.marker.setAnimation(google.maps.Animation.DROP);
+
 				}
 
 
@@ -365,4 +381,5 @@ function makeMarkerIcon(markerColor) {
     new google.maps.Size(21,34));
   return markerImage;
 }
+
 
