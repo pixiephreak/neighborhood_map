@@ -235,12 +235,12 @@ var vintageStyles = [
 var initialMarkers = [
 	{title: 'La Bamba Sub Shop', location: {lat: 38.924339, lng: -77.022798}, type: 'business'},
 	{title: 'Pleasant Plains Workshop', location: {lat: 38.924454, lng: -77.022806}, type: 'business'},
-	{title: 'Casa Ruby', location: {lat:8.926763, lng: -77.023212} , type: 'business'},
+	{title: 'Casa Ruby', location: {lat:38.926763, lng: -77.023212} , type: 'business'},
 	{title:'Harrar Coffee Roaster', location: {lat:38.927267, lng: -77.023277} , type: 'business'},
 	{title: "Morgan's Seafood", location: {lat:38.93017, lng: -77.023566} , type: 'business'},
 	{title: "Ana's Restaurant", location: {lat: 38.930857, lng: -77.023253}, type: 'business'},
 	{title: 'Yoga Heights', location: {lat: 38.933404, lng: -77.024329}, type: 'business'},
-	{title: 'Fish in the Hood', location: {lat: 8.934663, lng: -77.023904}, type: 'business'},
+	{title: 'Fish in the Hood', location: {lat: 38.934663, lng: -77.023904}, type: 'business'},
 	{title: '32Thirty-Two Apartments', location: {lat: 38.930985, lng: -77.023936}, type: 'housing'},
 	{title: 'Park Morton Apartments', location: {lat: 38.932629, lng:-77.022091}, type: 'housing'},
 	{title: '3 Tree Flats', location: {lat:38.939390, lng:-77.025359}, type: 'housing'},
@@ -258,6 +258,7 @@ var Place = function(data, map) {
 	self.highlitedIcon = makeMarkerIcon('9653ac');
 	self.name = data.title;
 	self.type = data.type;
+	self.currentMarker = null;
 	self.marker = new google.maps.Marker({
 		map: map,
 		position: data.location,
@@ -281,7 +282,6 @@ var Place = function(data, map) {
 			infowindow.addListener('closeclick', function(){
 			infowindow.marker = null;
 			});
-			//setAnimation on click
 			//set API request
 			//add toggle button for list view to make it responsive using display none or display blick
 			//slide in and out using off canvas or use bootstrap
@@ -289,13 +289,11 @@ var Place = function(data, map) {
 	});
 
 	function toggleBounce(){
+
 		if(infowindow.marker != self.marker){
 			infowindow.marker = self.marker;
-			if (infowindow.marker.getAnimation() !== null) {
-			  infowindow.marker.setAnimation(null);
-			} else {
-			  infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
-			}
+			infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
+			setTimeout(function(){ infowindow.marker.setAnimation(null); }, 750);
 		}
 	}
 
