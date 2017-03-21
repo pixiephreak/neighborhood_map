@@ -229,9 +229,9 @@ var vintageStyles = [
 }
 ];
 
-// list of places/locations to make into markers on load (apartments)
+
 //TO-DO Add website content to data under key "info"
-// add types
+
 var initialMarkers = [
 	{title: 'La Bamba Sub Shop', location: {lat: 38.924339, lng: -77.022798}, type: 'business'},
 	{title: 'Pleasant Plains Workshop', location: {lat: 38.924454, lng: -77.022806}, type: 'business'},
@@ -244,7 +244,7 @@ var initialMarkers = [
 	{title: '32Thirty-Two Apartments', location: {lat: 38.930985, lng: -77.023936}, type: 'housing'},
 	{title: 'Park Morton Apartments', location: {lat: 38.932629, lng:-77.022091}, type: 'housing'},
 	{title: '3 Tree Flats', location: {lat:38.939390, lng:-77.025359}, type: 'housing'},
-	{title:'Park Place', location: {lat:38.937395, lng:-77.024877}, type: 'housing'},
+	{title:'Park Place at Petworth Metro', location: {lat:38.937395, lng:-77.024877}, type: 'housing'},
 	{title: 'The Swift Petworth', location: {lat:38.938373, lng:-77.024898}, type: 'housing'}
 	];
 
@@ -266,33 +266,83 @@ var Place = function(data, map) {
 		title: data.title,
 		icon: self.defaultIcon
 	});
+	self.toggleBounce = function(marker){
+			marker.setAnimation(google.maps.Animation.BOUNCE);
+			setTimeout(function(){ infowindow.marker.setAnimation(null); }, 1400);
+	};
+	self.getData = function() {
+        /**
+         * Generates a random number and returns it as a string for OAuthentication
+         * @return {string}
+         */
+        function nonce_generate() {
+            return (Math.floor(Math.random() * 1e12).toString());
+        }
+
+        // var YELP_BASE_URL = 'https://api.yelp.com/';
+
+        var yelp_url = 'https://api.yelp.com/v2/search';
+
+        var parameters = {
+            oauth_consumer_key:  "yVy9s54D7PTzToicjSueFA",
+            oauth_token: "ZgNxvcW8R_ccZOetOQl-hXbe3yqSwvgu",
+            oauth_nonce: nonce_generate(),
+            oauth_timestamp: Math.floor(Date.now() / 1000),
+            oauth_signature_method: 'HMAC-SHA1',
+            oauth_version: '1.0',
+            limit: 1,
+            callback: 'cb',
+            term: self.name,
+            location: 'Washington, DC'
+        };
+
+        var encodedSignature = oauthSignature.generate('GET', yelp_url, parameters, "Z-qJKTqp-NRvzSGqnyaLgwyQY9s", "L61hpk9p-ec31fehJOwq58jDGzE");
+        parameters.oauth_signature = encodedSignature;
+
+        var settings = {
+            url: yelp_url,
+            data: parameters,
+            cache: true, // This is crucial to include as well to prevent jQuery from adding on a cache-buster parameter "_=23489489749837", invalidating our oauth-signature
+            dataType: 'jsonp',
+            success: function(results) {
+                // Do stuff with results
+                console.log('success!');
+                console.log(results);
+                infowindow.setContent(`<div><span>Name: ${results.businesses[0].name}</span><br><span>Phone: ${results.businesses[0].display_phone}<span><br><img alt = "${results.businesses[0].name}" src ="${results.businesses[0].image_url}"/><div>`);
+            },
+            error: function(e) {
+                // Do stuff on fail
+                console.log('error!');
+                console.log(e);
+            }
+        };
+
+        // Send AJAX query via jQuery library.
+        $.ajax(settings);
+    }
+
 	self.marker.addListener('mouseout', function(){
 		this.setIcon(self.defaultIcon);
 	});
 	self.marker.addListener('mouseover', function(){
 		this.setIcon(self.highlitedIcon);
 	})
-
 	self.marker.addListener('click', function(){
 		if(infowindow.marker != self.marker){
 			infowindow.marker = self.marker;
 			infowindow.open(map, self.marker);
-			infowindow.setContent('<div>'+ data.title + '<div>');
-			// infowindow.marker.setAnimation(google.maps.Animation.BOUNCE)
 			infowindow.addListener('closeclick', function(){
 			infowindow.marker = null;
 			});
-			toggleBounce(this);
+			self.toggleBounce(this);
+			self.getData();
 			//set API request
 			//add toggle button for list view to make it responsive using display none or display blick
 			//slide in and out using off canvas or use bootstrap
 		}
 	});
 
-	function toggleBounce(marker){
-			marker.setAnimation(google.maps.Animation.BOUNCE);
-			setTimeout(function(){ infowindow.marker.setAnimation(null); }, 1400);
-	}
+
 
 
 
@@ -316,7 +366,6 @@ var ViewModel = function(){
 		}else{
 			self.places().forEach(function(place){
 				place.marker.setVisible(false); // marker is hidden
-				// place.marker.setAnimation(google.maps.Animation.DROP);
 
 				var type = place.type;
 				if(self.selectedCategory().toLowerCase() === type.toLowerCase()){
@@ -380,6 +429,8 @@ function makeMarkerIcon(markerColor) {
 function googleError(){
 	alert("Google failed to respond. Try again later");
 }
+
+
 
   // var parameters = {
   //   oauth_consumer_key: YELP_KEY,
