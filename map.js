@@ -273,27 +273,25 @@ var Place = function(data, map) {
 		this.setIcon(self.highlitedIcon);
 	})
 
-	self.marker.addListener('click', toggleBounce, function(){
+	self.marker.addListener('click', function(){
 		if(infowindow.marker != self.marker){
 			infowindow.marker = self.marker;
 			infowindow.open(map, self.marker);
 			infowindow.setContent('<div>'+ data.title + '<div>');
-			infowindow.marker.setAnimation(google.maps.Animation.BOUNCE)
+			// infowindow.marker.setAnimation(google.maps.Animation.BOUNCE)
 			infowindow.addListener('closeclick', function(){
 			infowindow.marker = null;
 			});
+			toggleBounce(this);
 			//set API request
 			//add toggle button for list view to make it responsive using display none or display blick
 			//slide in and out using off canvas or use bootstrap
 		}
 	});
 
-	function toggleBounce(){
-		if(infowindow.marker != self.marker){
-			infowindow.marker = self.marker;
-			infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
+	function toggleBounce(marker){
+			marker.setAnimation(google.maps.Animation.BOUNCE);
 			setTimeout(function(){ infowindow.marker.setAnimation(null); }, 1400);
-		}
 	}
 
 

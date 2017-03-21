@@ -1,5 +1,54 @@
+    function getData() {
+        /**
+         * Generates a random number and returns it as a string for OAuthentication
+         * @return {string}
+         */
+        function nonce_generate() {
+            return (Math.floor(Math.random() * 1e12).toString());
+        }
 
+        // var YELP_BASE_URL = 'https://api.yelp.com/';
 
+        var yelp_url = 'https://api.yelp.com/v2/search';
+
+        var parameters = {
+            oauth_consumer_key:  "yVy9s54D7PTzToicjSueFA",
+            oauth_token: "ZgNxvcW8R_ccZOetOQl-hXbe3yqSwvgu",
+            oauth_nonce: nonce_generate(),
+            oauth_timestamp: Math.floor(Date.now() / 1000),
+            oauth_signature_method: 'HMAC-SHA1',
+            oauth_version: '1.0',
+            limit: 1,
+            callback: 'cb',
+            term: 'Yoga Heights',
+            location: 'Washington, DC'
+        };
+
+        var encodedSignature = oauthSignature.generate('GET', yelp_url, parameters, "Z-qJKTqp-NRvzSGqnyaLgwyQY9s", "L61hpk9p-ec31fehJOwq58jDGzE");
+        parameters.oauth_signature = encodedSignature;
+
+        var settings = {
+            url: yelp_url,
+            data: parameters,
+            cache: true, // This is crucial to include as well to prevent jQuery from adding on a cache-buster parameter "_=23489489749837", invalidating our oauth-signature
+            dataType: 'jsonp',
+            success: function(results) {
+                // Do stuff with results
+                console.log('success!');
+                console.log(results);
+            },
+            error: function(e) {
+                // Do stuff on fail
+                console.log('error!');
+                console.log(e);
+            }
+        };
+
+        // Send AJAX query via jQuery library.
+        $.ajax(settings);
+    }
+
+getData();
       // var auth = {
       //   //
       //   // Update with your auth tokens.
