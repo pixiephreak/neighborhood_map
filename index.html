@@ -31,13 +31,17 @@
     </div>
     <!-- <div ANIMATED STREETVIEW TIMELAPSE WHEN INFOWINDOW CLICKED></div> -->
   <!-- load jquery -->
-  <script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
   <!-- Latest compiled and BS minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+   <script src="oauth-signature.min.js"></script>
+   <script type="text/javascript" src="sha1.js"></script>
+  <script src="api.js"></script>
 	<script src="map.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVJQodSaGBMvQx82vNjSPH_BTgu04NtIk&callback=vm.initMap"
-	async defer></script>
+	async defer onerror = "googleError()"></script>
 <!-- add on error -->
 
   </body>

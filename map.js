@@ -289,11 +289,10 @@ var Place = function(data, map) {
 	});
 
 	function toggleBounce(){
-
 		if(infowindow.marker != self.marker){
 			infowindow.marker = self.marker;
 			infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
-			setTimeout(function(){ infowindow.marker.setAnimation(null); }, 750);
+			setTimeout(function(){ infowindow.marker.setAnimation(null); }, 1400);
 		}
 	}
 
@@ -380,4 +379,20 @@ function makeMarkerIcon(markerColor) {
   return markerImage;
 }
 
+function googleError(){
+	alert("Google failed to respond. Try again later");
+}
 
+  // var parameters = {
+  //   oauth_consumer_key: YELP_KEY,
+  //   oauth_token: YELP_TOKEN,
+  //   oauth_nonce: nonceGenerate(),
+  //   oauth_timestamp: Math.floor(Date.now()/1000),
+  //   oauth_signature_method: 'HMAC-SHA1',
+  //   oauth_version: '1.0',
+  //   callback: 'cb',
+  //   term: 'vineyard',
+  //   location: '22630'
+  // };
+
+// https://api.yelp.com/oauth2/token
