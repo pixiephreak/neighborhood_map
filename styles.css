@@ -83,7 +83,7 @@
         /* If there is space (> 800px), we keep the drawer open by default. */
         @media (min-width: 600px) {
           main > #menu:after {
-            content: 'The drawer stays open if width > 600px';
+            /*content: 'The drawer stays open if width > 600px';*/
           }
           main p, nav p {
             text-decoration: line-through;
