@@ -1,17 +1,8 @@
 //HTML/View model bindings
-// KNOCKOUT TO-DOs
-// 	load map (viewModel bind <div> to something(attr?))
-// 	load all markers (viewModel bind <div> to foreach array )
-// 	list view dropdown (view model bind dropdown(bootstrap?) to filter function )(see google maps apartment finder course?)
-// 	load infowindow content from api  ( bind infowindow <div>(where?))
-// 	load animated timelapse background image from streetview api( viewmodel bind to <div>)
-
-// APP FUNCTIONALITY
-// 	landing page: map and all markers load
-// 	interactivity: each marker has an infowindow / wikipedia info loads when clicked / background changes to streetview timelaps when infowindow when clicked
-// 	filter: category can be selected from dropdown / reduces number of markers on screen/ creates <DIV>  to display overview text / infowindow behaves the same
-
-// game plan: -> list view -> click binding to activate the list view items' markers -> filter the list and the markers -> third party api -> marker animation and styling
+//TO-DO:
+//improve responsivity : css(slide in menu);
+//improve accuracy of places displaid by YELP
+// A README file is included detailing all steps required to successfully run the application.
 
 var vintageStyles = [
 {
@@ -312,7 +303,7 @@ var Place = function(data, map) {
             },
             error: function(e) {
                 // Do stuff on fail
-                console.log('error!');
+                alert('Yelp encountered an error!');
                 console.log(e);
             }
         };
@@ -429,6 +420,22 @@ function makeMarkerIcon(markerColor) {
 function googleError(){
 	alert("Google failed to respond. Try again later");
 }
+
+
+  /*
+   * Open the drawer when the menu ison is clicked.
+   */
+  var menu = document.querySelector('#menu');
+  var main = document.querySelector('main');
+  var drawer = document.querySelector('#drawer');
+
+  menu.addEventListener('click', function(e) {
+    drawer.classList.toggle('open');
+    e.stopPropagation();
+  });
+  main.addEventListener('click', function() {
+    drawer.classList.remove('open');
+  });
 
 
 
