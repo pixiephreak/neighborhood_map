@@ -3,6 +3,7 @@
 //improve responsivity : css(slide in menu);
 //improve accuracy of places displaid by YELP
 // A README file is included detailing all steps required to successfully run the application.
+// beautify code and comment
 
 var vintageStyles = [
 {
@@ -408,7 +409,7 @@ ko.applyBindings(vm);
 
 function makeMarkerIcon(markerColor) {
   var markerImage = new google.maps.MarkerImage(
-    'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+    'https://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
     '|40|_|%E2%80%A2',
     new google.maps.Size(21, 34),
     new google.maps.Point(0, 0),
@@ -422,19 +423,3 @@ function googleError(){
 }
 
 
-
-
-
-  // var parameters = {
-  //   oauth_consumer_key: YELP_KEY,
-  //   oauth_token: YELP_TOKEN,
-  //   oauth_nonce: nonceGenerate(),
-  //   oauth_timestamp: Math.floor(Date.now()/1000),
-  //   oauth_signature_method: 'HMAC-SHA1',
-  //   oauth_version: '1.0',
-  //   callback: 'cb',
-  //   term: 'vineyard',
-  //   location: '22630'
-  // };
-
-// https://api.yelp.com/oauth2/token

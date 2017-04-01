@@ -13,7 +13,7 @@
   <body>
     <nav id="drawer">
         <!-- KO dropdown -->
-        <p id="menu">
+        <p>
            <!-- Category: -->
             <select data-bind="options: categories,
                                value: selectedCategory ,
@@ -36,6 +36,24 @@
       <div id="map"></div>
     </main>
 </body>
+
+    <script type="text/javascript">
+   /*
+     * Open the drawer when the menu ison is clicked.
+     */
+    var menu = document.getElementById('menu');
+    var main = document.querySelector('main');
+    var drawer = document.querySelector('#drawer');
+
+    menu.addEventListener('click', function(e) {
+      console.log('hamburger clicked');
+      drawer.classList.toggle('open');
+      e.stopPropagation();
+    });
+    main.addEventListener('click', function() {
+      drawer.classList.remove('open');
+    });
+  </script>
 
       <!-- load jquery -->
   <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
