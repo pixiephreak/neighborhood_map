@@ -2,7 +2,7 @@
        * element that contains the map. */
       #map {
         height: 100%;
-        width: 80%;
+        width: 100%;
         float: right;
       }
       /* Optional: Makes the sample page fill the window. */
@@ -26,6 +26,10 @@
         a#menu svg {
           width: 40px;
           fill: #000;
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          z-index: 9;
         }
         nav, main {
           box-sizing: border-box;
@@ -41,6 +45,7 @@
           z-index: 1;
           background-color: #fff;
           position: fixed;
+          margin-top: 50px;
         }
 
 
@@ -54,8 +59,8 @@
           height: 100%;
           position: absolute;
           /* This trasform moves the drawer off canvas. */
-          -webkit-transform: translate(-300px, 0);
-          transform: translate(-300px, 0);
+          -webkit-transform: translate(-320px, 0);
+          transform: translate(-320px, 0);
           /* Optionally, we animate the drawer. */
           transition: transform 0.3s ease;
         }
@@ -65,7 +70,7 @@
         }
 
         /* If there is enough space (> 600px), we keep the drawer open all the time. */
-        @media (min-width: 600px) {
+        @media (min-width: 800px) {
 
           /* We open the drawer. */
           nav {
@@ -89,14 +94,23 @@
           }
 
           #drawer {
-             margin-top: 30%;
-             width: 70%;
-            height: 70%;
+             width: 280px;
+             z-index: 8;
+             margin-top: 10px;
+          }
+
+          #map {
+            width: 80%; /* Fallback for browsers that don't support calc */
+            width: calc(100vw - 300px);
+          }
+
+          a#menu svg {
+            display: none;
           }
         }
 
         /* If there is space (> 800px), we keep the drawer open by default. */
-        @media (min-width: 600px) {
+        @media (min-width: 800px) {
           main > #menu:after {
             /*content: 'The drawer stays open if width > 600px';*/
           }

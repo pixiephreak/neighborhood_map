@@ -348,6 +348,12 @@ var ViewModel = function(){
 	this.categories = ko.observableArray(["All","Housing","Business"]);
 	this.places = ko.observableArray([]);
 	this.selectedCategory = ko.observable('');
+
+	this.navVisible = ko.observable(true);
+	this.toggleNav = function() {
+		this.navVisible(!this.navVisible());
+	}
+
 	this.filterPlaces = ko.computed(function(){
 		self.currentPlaces = ko.observableArray([]);
 		if(!self.selectedCategory()|| self.selectedCategory() === 'All'){
