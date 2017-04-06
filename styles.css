@@ -37,6 +37,9 @@
           top: 10px;
           left: 10px;
           z-index: 9;
+          background-color: rgba(300, 300, 300, .35);
+          border-radius: 10px;
+
         }
         nav, main {
           box-sizing: border-box;
