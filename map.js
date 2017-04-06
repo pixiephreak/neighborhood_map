@@ -405,6 +405,8 @@ var ViewModel = function(){
 	this.setWindow = function(clickedLoc){
 		var marker = clickedLoc.marker;
 		google.maps.event.trigger(marker,'click');
+		console.log('click');
+		self.toggleNav()
 	}
 
 };
