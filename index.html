@@ -1,71 +1,56 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Georgia Avenue Inheritance Tour</title>
-      <meta name="viewport" content="initial-scale=1.0">
-      <meta charset="utf-8">
-      <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-       <link rel="stylesheet" type="text/css" href="styles.css">
-  </head>
-  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgia Avenue Inheritance Tour</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+</head>
+
+<body>
     <nav id="drawer" data-bind="css: {open: navVisible}">
         <!-- KO dropdown -->
-        <p>
-           <!-- Category: -->
+        <aside>
+            <!-- Category: -->
             <select data-bind="options: categories,
                                value: selectedCategory ,
                                optionsCaption: 'Choose...'"></select>
-        </p>
+        </aside>
         <div>
-          <ul  data-bind= "foreach: filterPlaces " >
-            <li data-bind="text: name, click: $parent.setWindow">
-            </li>
-          </ul>
+            <ul data-bind="foreach: filterPlaces ">
+                <li data-bind="text: name, click: $parent.setWindow">
+                </li>
+            </ul>
         </div>
     </nav>
 
     <a id="menu" data-bind="click: toggleNav">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
       </svg>
     </a>
 
     <main>
-      <div id="map"></div>
+        <div id="map"></div>
     </main>
 </body>
 
-    <script type="text/javascript">
-   /*
-     * Open the drawer when the menu ison is clicked.
-     */
-    // var menu = document.getElementById('menu');
-    // var main = document.querySelector('main');
-    // var drawer = document.querySelector('#drawer');
-
-    // menu.addEventListener('click', function(e) {
-    //   console.log('hamburger clicked');
-    //   drawer.classList.toggle('open');
-    //   e.stopPropagation();
-    // });
-    // main.addEventListener('click', function() {
-    //   drawer.classList.remove('open');
-    // });
-  </script>
-
-      <!-- load jquery -->
-  <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
-  <!-- Latest compiled and BS minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-   <script src="oauth-signature.min.js"></script>
-  <script src="map.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVJQodSaGBMvQx82vNjSPH_BTgu04NtIk&callback=vm.initMap"
-  async defer onerror = "googleError()"></script>
-<!-- add on error -->
+<!-- load jquery -->
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+<!-- load knockout -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+<!-- Latest compiled and BS minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- google maps api -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="assets/js/oauth-signature.min.js"></script>
+<script src="assets/js/map-styles.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVJQodSaGBMvQx82vNjSPH_BTgu04NtIk&callback=vm.initMap" async defer onerror="googleError()"></script>
 
 </html>
