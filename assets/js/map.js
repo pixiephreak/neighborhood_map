@@ -160,7 +160,6 @@ var Place = function(data, map) {
         var name = results.businesses[0].name || 'no name returned by Yelp for this location';
         var phone = results.businesses[0].display_phone || 'no phone returned by Yelp for this location';
         var image = results.businesses[0].image_url ||'no name image returned by Yelp for this location'
-        console.log(name, phone, image, 'something');
         infowindow.setContent(`<div><span>Name: ${name}</span><br><span>Phone: ${phone}<span><br><img alt = "${name}" src ="${image}"/><div>`);
       },
       error: function(e) {
