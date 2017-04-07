@@ -157,7 +157,11 @@ var Place = function(data, map) {
       cache: true, // This is crucial to include as well to prevent jQuery from adding on a cache-buster parameter "_=23489489749837", invalidating our oauth-signature
       dataType: 'jsonp',
       success: function(results) {
-        infowindow.setContent(`<div><span>Name: ${results.businesses[0].name}</span><br><span>Phone: ${results.businesses[0].display_phone}<span><br><img alt = "${results.businesses[0].name}" src ="${results.businesses[0].image_url}"/><div>`);
+        var name = results.businesses[0].name || 'no name returned by Yelp for this location';
+        var phone = results.businesses[0].display_phone || 'no phone returned by Yelp for this location';
+        var image = results.businesses[0].image_url ||'no name image returned by Yelp for this location'
+        console.log(name, phone, image, 'something');
+        infowindow.setContent(`<div><span>Name: ${name}</span><br><span>Phone: ${phone}<span><br><img alt = "${name}" src ="${image}"/><div>`);
       },
       error: function(e) {
         alert('Yelp encountered an error!');
