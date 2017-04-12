@@ -159,7 +159,7 @@ var Place = function(data, map) {
       success: function(results) {
         var name = results.businesses[0].name || 'no name returned by Yelp for this location';
         var phone = results.businesses[0].display_phone || 'no phone returned by Yelp for this location';
-        var image = results.businesses[0].image_url ||'no name image returned by Yelp for this location'
+        var image = results.businesses[0].image_url ||'no name image returned by Yelp for this location';
         infowindow.setContent(`<div><span>Name: ${name}</span><br><span>Phone: ${phone}<span><br><img alt = "${name}" src ="${image}"/><div>`);
       },
       error: function(e) {
@@ -169,14 +169,14 @@ var Place = function(data, map) {
 
     // Send AJAX query via jQuery library.
     $.ajax(settings);
-  }
+  };
 
   self.marker.addListener('mouseout', function() {
     this.setIcon(self.defaultIcon);
   });
   self.marker.addListener('mouseover', function() {
     this.setIcon(self.highlitedIcon);
-  })
+  });
   self.marker.addListener('click', function() {
     if (infowindow.marker != self.marker) {
       infowindow.marker = self.marker;
@@ -202,7 +202,7 @@ var ViewModel = function() {
   this.navVisible = ko.observable(true);
   this.toggleNav = function() {
     this.navVisible(!this.navVisible());
-  }
+  };
 
   this.filterPlaces = ko.computed(function() {
     self.currentPlaces = ko.observableArray([]);
@@ -236,13 +236,13 @@ var ViewModel = function() {
       lat: 38.924569,
       lng: -77.023722
     };
-    var swift = {
-      lat: 38.938373,
-      lng: -77.024898
-    }
+    var ThirtyTwo = {
+      lat: 38.930985,
+      lng: -77.023936
+    };
     map = new google.maps.Map(document.getElementById('map'), {
-      center: swift,
-      zoom: 14,
+      center: ThirtyTwo,
+      zoom: 16,
       styles: vintageStyles,
       mapTypeControl: false
     });
@@ -258,8 +258,8 @@ var ViewModel = function() {
   this.setWindow = function(clickedLoc) {
     var marker = clickedLoc.marker;
     google.maps.event.trigger(marker, 'click');
-    self.toggleNav()
-  }
+    self.toggleNav();
+  };
 
 };
 
