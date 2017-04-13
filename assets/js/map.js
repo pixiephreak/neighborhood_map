@@ -1,6 +1,7 @@
 
 var initialMarkers = [{
     title: 'La Bamba Sub Shop',
+    phone: '(202) 488-3676',
     location: {
       lat: 38.924339,
       lng: -77.022798
@@ -157,14 +158,18 @@ var Place = function(data, map) {
       cache: true, // This is crucial to include as well to prevent jQuery from adding on a cache-buster parameter "_=23489489749837", invalidating our oauth-signature
       dataType: 'jsonp',
       success: function(results) {
-        var name = results.businesses[0].name || 'no name returned by Yelp for this location';
-        var phone = results.businesses[0].display_phone || 'no phone returned by Yelp for this location';
-        var image = results.businesses[0].image_url ||'no name image returned by Yelp for this location';
-        infowindow.setContent(`<div><span>Name: ${name}</span><br><span>Phone: ${phone}<span><br><img alt = "${name}" src ="${image}"/><div>`);
+        if(results.businesses.length > 0){
+            var name = results.businesses[0].name || 'no name returned by Yelp for this location';
+            var phone = results.businesses[0].display_phone || 'no phone returned by Yelp for this location';
+            var image = results.businesses[0].image_url ||'no name image returned by Yelp for this location';
+            infowindow.setContent(`<div><span>Name: ${name}</span><br><span>Phone: ${phone}<span><br><img alt = "${name}" src ="${image}"/><div>`);
+            }else{
+              infowindow.setContent(`<div>Yelp call failed.<div>`);
+            }
       },
       error: function(e) {
-        alert('Yelp encountered an error!');
-      }
+                console.log('API did not load', e);
+              }
     };
 
     // Send AJAX query via jQuery library.
