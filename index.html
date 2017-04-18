@@ -22,7 +22,7 @@
                                optionsCaption: 'Choose...'"></select>
         </aside>
         <div>
-            <ul id='placesList' data-bind="foreach: filterPlaces ">
+            <ul data-bind="foreach: filterPlaces ">
                 <li data-bind="text: name, click: $parent.setWindow">
                 </li>
             </ul>
