@@ -22,7 +22,7 @@
                                optionsCaption: 'Choose...'"></select>
         </aside>
         <div>
-            <ul data-bind="foreach: filterPlaces ">
+            <ul id='placesList' data-bind="foreach: filterPlaces ">
                 <li data-bind="text: name, click: $parent.setWindow">
                 </li>
             </ul>
@@ -50,7 +50,6 @@
 <!-- Latest compiled and BS minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <!-- google maps api -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script src="assets/js/oauth-signature.min.js"></script>
 <script src="assets/js/map-styles.js"></script>
 <script src="assets/js/map.js"></script>

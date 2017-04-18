@@ -168,7 +168,7 @@ var Place = function(data, map) {
             }
       },
       error: function(e) {
-                console.log('API did not load', e);
+                infowindow.setContent(`<div>Yelp call failed.<div>`);
               }
     };
 
