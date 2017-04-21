@@ -126,7 +126,7 @@ var Place = function(data, map) {
     marker.setAnimation(google.maps.Animation.BOUNCE);
     setTimeout(function() {
       infowindow.marker.setAnimation(null);
-    }, 1400);
+    }, 400);
   };
   self.getData = function() {
 
@@ -168,8 +168,8 @@ var Place = function(data, map) {
             }
       },
       error: function(e) {
-                infowindow.setContent(`<div>Yelp call failed.<div>`);
-              }
+        infowindow.setContent(`<div>Yelp call failed.<div>`);
+      }
     };
 
     // Send AJAX query via jQuery library.
